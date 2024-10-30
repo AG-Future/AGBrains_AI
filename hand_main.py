@@ -1,4 +1,3 @@
-from asyncore import write
 from typing import Tuple
 import math
 import cv2
@@ -7,12 +6,11 @@ from tensorflow.python.ops.signal.shape_ops import frame
 
 from send_request import send_request
 
-
 try:
     print("Input stayLength(float number): ", end='')
     stayLength = float(input())
 except ValueError:
-    stayLength = 1200
+    stayLength = 2500
     print(f"only Numbers are allowed, now stayLength is default({stayLength})")
 
 # 미디어 파이프의 Hand 모델을 로드합니다.
@@ -20,8 +18,8 @@ mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
 
 
-HAND_SIZE_THRESHOLD = 0.004
-HAND_SIZE_MINI = 0.0823
+HAND_SIZE_THRESHOLD = 3200
+HAND_SIZE_MINI = 2700
 
 
 cap = cv2.VideoCapture(0)

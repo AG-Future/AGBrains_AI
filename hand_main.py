@@ -144,7 +144,7 @@ def x_y():
         thickness=2
     )
     '''
-    #send_request(direction)
+    send_request(direction)
 
     cv2.putText(
         frame,

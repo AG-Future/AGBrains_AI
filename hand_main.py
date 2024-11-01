@@ -28,7 +28,7 @@ cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
 
 
 def calculate_hand_size():
-    # 손목(0번)과 중지 끝(12번) 사이의 거리로 손 크기를 추정
+    # 손목(0번)과 중지 시작(9번) 사이의 거리로 손 크기를 추정
     wrist = hand_landmarks.landmark[0]
     middle = hand_landmarks.landmark[9]
     height, width = frame.shape[:2]
@@ -142,7 +142,7 @@ def x_y():
         thickness=2
     )
     '''
-    #send_request(direction)
+    send_request(direction)
 
     cv2.putText(
         frame,

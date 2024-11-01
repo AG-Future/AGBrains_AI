@@ -10,7 +10,7 @@ try:
     print("Input stayLength(float number): ", end='')
     stayLength = float(input())
 except ValueError:
-    stayLength = 2500
+    stayLength = 5000
     print(f"only Numbers are allowed, now stayLength is default({stayLength})")
 
 # 미디어 파이프의 Hand 모델을 로드합니다.
@@ -76,8 +76,8 @@ def calculate_hand_size():
 
 
 
-def get_direction(p1: Tuple[float, float], p2: Tuple[float, float], p3: Tuple[float, float]):
-    if length_of(p1, p3) < stayLength or length_of(p2, p3) < stayLength:
+def get_direction(p1: Tuple[float, float], p2: Tuple[float, float]):
+    if length_of(p1, p2) < stayLength:
         return "stay"
     tilt = get_tilt(p1, p2)
 
@@ -108,15 +108,15 @@ def get_tilt(p1: Tuple[float, float], p2: Tuple[float, float]):
     return (p2[1] - p1[1]) / (p2[0] - p1[0])
 
 def x_y():
-    x1 = hand_landmarks.landmark[9].x
-    y1 = hand_landmarks.landmark[9].y
+    x1 = hand_landmarks.landmark[12].x
+    y1 = hand_landmarks.landmark[12].y
     #z1 = (hand_landmarks.landmark[12].z * 100) // 1
 
     x2 = hand_landmarks.landmark[0].x
     y2 = hand_landmarks.landmark[0].y
     #z2 = (hand_landmarks.landmark[0].z * 100) // 1
 
-    direction = get_direction((x1, y1), (x2, y2), (hand_landmarks.landmark[12].x, hand_landmarks.landmark[12].y))
+    direction = get_direction((x1, y1), (x2, y2))
     '''
     cv2.putText(
         frame,
@@ -142,7 +142,7 @@ def x_y():
         thickness=2
     )
     '''
-    send_request(direction)
+    #send_request(direction)
 
     cv2.putText(
         frame,

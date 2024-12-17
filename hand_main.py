@@ -39,14 +39,11 @@ except ValueError:
 
 
 try:
-    print("camera set(0 or 2): ", end='')
+    print("camera set(0 - a): ", end='')
     camera_set = int(input())
-    if camera_set in [0, 2]:
-        pass
-    else:
-        print("Please enter 0 or 2, now camera is default(0)")
 except ValueError:
     print("Please enter a number, now camera is default(0)")
+    camera_set = 0
 
 
 
@@ -83,7 +80,7 @@ def calculate_hand_size():
     text_y = (height + text_size[1]) // 2  # 프레임의 세로 중앙에 텍스트의 세로 중심 맞추기
 
     hand_z = abs(abs(hand_landmarks.landmark[9].z) - abs(hand_landmarks.landmark[0].z))
-    # print(f'hand_size: {hand_size}\nhand_z: {hand_z}\nhand9z: {hand_landmarks.landmark[9]}\nhand0z: {hand_landmarks.landmark[0].z}')
+
     if hand_size < HAND_SIZE_MINI:
         cv2.putText(frame, text, (text_x, text_y), font, font_scale, color, thickness, cv2.LINE_AA)
 
@@ -91,22 +88,6 @@ def calculate_hand_size():
         cv2.putText(frame, "Caution: Too far from camera", (10, 50),
                     cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2, cv2.LINE_AA)
 
-    '''
-    hand0z: -8.227418391015817e-08
-    hand_size: 0.07266054388026055
-    hand_z: 0.0007101459252609743
-    hand9z: x: 0.464547366
-    y: 0.69831568
-    z: 0.00071023294
-
-
-    hand0z: 4.253604402038036e-08
-    hand_size: 0.01819072473518678
-    hand_z: 0.021593765719003954
-    hand9z: x: 0.420990974
-    y: 0.627887487
-    z: -0.0215938296
-    '''
 
 
 def get_direction(p1: Tuple[float, float], p2: Tuple[float, float]):

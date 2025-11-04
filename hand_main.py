@@ -1,7 +1,7 @@
 from typing import Tuple
 import cv2
 import mediapipe as mp
-from send_request import send_request
+from send_request import send_request, set_port
 
 # 사용자 입력 초기 설정
 send_request_true = 0
@@ -27,8 +27,17 @@ if temp_default:
     temp = input()
     if temp in ['y', 'Y']:
         send_request_true = 1
+        # 포트 번호 설정
+        try:
+            print("port set: ", end='')
+            port = int(input())
+            set_port(port)
+        except ValueError:
+            print("Please enter a number, now port is default(80)")
+
     if temp not in ['y', 'Y', 'n', 'N']:
         print("Please enter y or n, now send_request is default(n)")
+
 
     # 손 개수 설정
     try:
@@ -45,7 +54,8 @@ if temp_default:
         camera_set = int(input())
     except ValueError:
         print("Please enter a number, now camera is default(0)")
-        camera_set = 0
+
+
 
 # 미디어파이프 설정
 mp_drawing = mp.solutions.drawing_utils
